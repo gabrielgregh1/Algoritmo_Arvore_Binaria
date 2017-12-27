@@ -6,18 +6,26 @@ typedef struct tree{
 	struct tree* right;
 	struct tree* left;
 }no; 
-
+//RAIZ 
 no*root = NULL;
 
 void menu();
 struct tree *insere(struct tree* raiz,struct tree* aux,int v);
+void preOrdem(struct tree *aux);
+void inOrdem(struct tree *aux);
+void posOrdem(struct tree *aux);
+
 
 int main(){
 	
 	menu();
-	
+	preOrdem(root);
+	printf("\n");
+	inOrdem(root);
+	printf("\n");
+	posOrdem(root);
 }
-
+//Menu para INSERIR de valores
 void menu(){
 	int valor;
 	int opcao = 1;
@@ -36,7 +44,7 @@ void menu(){
 	}while(opcao == 1);
 	
 }
-
+//Forma de INSERECAO em ARVORE
 struct tree *insere(struct tree* raiz,struct tree* aux,int v){
 	if(aux == NULL){
 		aux = (struct tree*)malloc(sizeof(struct tree));
@@ -61,6 +69,40 @@ struct tree *insere(struct tree* raiz,struct tree* aux,int v){
 	else
 		return insere(aux, aux->right, v);
 	
+}
+//Forma de EXIBICAO PREORDEM
+void preOrdem(struct tree *aux){
+	if(aux == NULL)
+		return;
+	
+	if(aux->info)
+		printf("%d",aux->info);
+	
+	preOrdem(aux->left);
+	preOrdem(aux->right);	
+}
+//Forma de EXIBICAO INORDEM
+void inOrdem(struct tree *aux){
+	if(aux == NULL)
+		return;
+	
+	preOrdem(aux->left);
+	
+	if(aux->info)
+		printf("%d",aux->info);
+	
+	preOrdem(aux->right);	
+}
+//Forma de EXIBICAO POSORDEM
+void posOrdem(struct tree *aux){
+	if(aux == NULL)
+		return;
+	
+	preOrdem(aux->left);
+	preOrdem(aux->right);	
+
+	if(aux->info)
+		printf("%d",aux->info);	
 }
 
 
